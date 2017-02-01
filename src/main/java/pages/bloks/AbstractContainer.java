@@ -1,4 +1,4 @@
-package pages;
+package pages.bloks;
 
 import anatations.NameOfElement;
 import com.codeborne.selenide.ElementsContainer;
@@ -6,21 +6,20 @@ import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.NoSuchElementException;
 
 /**
- * Created by konstantin on 30.01.2017.
+ * Created by konstantin on 31.01.2017.
  */
-public abstract class AbstractPage {
-
+public class AbstractContainer extends ElementsContainer {
 
     public SelenideElement get(String elementName){
         Field[] fields = this.getClass().getDeclaredFields();
         try {
-            return (SelenideElement) Arrays.stream(fields)
+            return (SelenideElement) Arrays.asList(fields)
+                    .stream()
                     .filter(field -> field.isAnnotationPresent(NameOfElement.class)
                             && field.getAnnotation(NameOfElement.class).value().equals(elementName)).findFirst().get().get(this);
         } catch (IllegalAccessException e) {
@@ -35,7 +34,8 @@ public abstract class AbstractPage {
     public ElementsContainer getContainer(String elementName){
         Field[] fields = this.getClass().getDeclaredFields();
         try {
-            return (ElementsContainer) Arrays.stream(fields)
+            return (ElementsContainer) Arrays.asList(fields)
+                    .stream()
                     .filter(field -> field.isAnnotationPresent(NameOfElement.class)
                             && field.getAnnotation(NameOfElement.class).value().equals(elementName)).findFirst().get().get(this);
         } catch (IllegalAccessException e) {
@@ -47,10 +47,11 @@ public abstract class AbstractPage {
         }
     }
 
-    public <T extends ElementsContainer>List<T> getCollection(String elementName){
+    public List<ElementsContainer> getCollection(String elementName){
         Field[] fields = this.getClass().getDeclaredFields();
         try {
-            return (List<T>) Arrays.stream(fields)
+            return (List<ElementsContainer>) Arrays.asList(fields)
+                    .stream()
                     .filter(field -> field.isAnnotationPresent(NameOfElement.class)
                             && field.getAnnotation(NameOfElement.class).value().equals(elementName)).findFirst().get().get(this);
         } catch (IllegalAccessException e) {

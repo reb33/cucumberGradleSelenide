@@ -8,7 +8,7 @@ import org.openqa.selenium.support.FindBy;
 /**
  * Created by konstantin on 30.01.2017.
  */
-public class Duck extends ElementsContainer{
+public class Duck extends AbstractContainer{
 
     @NameOfElement(value = "название")
     @FindBy(css=".name")

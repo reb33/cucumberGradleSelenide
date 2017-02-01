@@ -2,4 +2,5 @@ Feature: firstTest
 
   Scenario: firstTest_scenario
 
-    Given Запустить
+    Given приложение запущено
+    Then данные коллекции

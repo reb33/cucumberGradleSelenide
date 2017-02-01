@@ -4,7 +4,7 @@ version '1.0-SNAPSHOT'
 apply plugin: 'groovy'
 apply plugin: 'java'
 
-sourceCompatibility = 1.5
+sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
@@ -21,6 +21,19 @@ dependencies {
     compile group: 'info.cukes', name: 'cucumber-junit', version: '1.2.5'
 }
 
-task wrapper(type: Wrapper) {
-    gradleVersion = '2.12'
+defaultTasks 'clean', 'test'
+
+task libs(type: Sync) {
+    from configurations.testCompile
+    into "$buildDir/lib"
+}
+
+compileJava.dependsOn libs
+
+[compileJava, compileTestJava]*.options.collect {options -> options.encoding = 'UTF-8'}
+[compileJava, compileTestJava]*.options.collect {options -> options.debug = true}
+
+test {
+    systemProperties 'file.encoding': 'UTF-8'
+    testLogging.showStandardStreams = true
 }

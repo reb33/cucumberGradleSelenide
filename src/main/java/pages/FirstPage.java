@@ -1,14 +1,19 @@
 package pages;
 
 import anatations.NameOfElement;
+import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.ElementsContainer;
 import com.codeborne.selenide.SelenideElement;
+import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
+import pages.bloks.Duck;
+
+import java.util.List;
 
 /**
  * Created by konstantin on 30.01.2017.
  */
-public class FirstPage {
+public class FirstPage extends AbstractPage{
 
     @NameOfElement(value = "фронтовая картинка")
     @FindBy(id="rslides1_s0")
@@ -16,7 +21,12 @@ public class FirstPage {
 
     @NameOfElement(value = "популярная утка")
     @FindBy(css="#box-most-popular ul li")
-    ElementsContainer popularDuck;
+    Duck popularDuck;
+
+
+    @NameOfElement(value = "популярные утки")
+    @FindBy(css="#box-most-popular ul li")
+    List<Duck> popularDucks;
 
 
 }
