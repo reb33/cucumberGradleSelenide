@@ -3,6 +3,8 @@ package steps;
 import static com.codeborne.selenide.Selenide.*;
 
 import static com.codeborne.selenide.Selenide.*;
+
+import com.codeborne.selenide.SelenideElement;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import pages.FirstPage;
@@ -20,6 +22,7 @@ public class MySteps {
     @Given("приложение запущено")
     public void start(){
         open("https://demo.litecart.net/en/");
+
     }
 
     @Then("данные контейнера ")
@@ -29,8 +32,9 @@ public class MySteps {
 
     @Then("данные коллекции")
     public void getCollection(){
+//        List<SelenideElement> ducks = firstPage.getList("список популярных уток");
+//        ducks.get(0).get("название");
         List<Duck> ducks = firstPage.getCollection("популярные утки");
-        ducks.get(0).get("название");
         System.out.println();
     }
 }

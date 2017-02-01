@@ -22,5 +22,6 @@ public class SmokeTest
         Configuration.timeout = 10000;
         System.setProperty("webdriver.chrome.driver", "C:/drv/chromedriver.exe");
         Configuration.browser = "chrome";
+
     }
 }
