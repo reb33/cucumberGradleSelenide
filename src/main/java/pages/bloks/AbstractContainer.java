@@ -32,7 +32,7 @@ public class AbstractContainer extends ElementsContainer {
                             && field.getAnnotation(NameOfElement.class).value().equals(elementName)).findFirst().get().get(this);
         } catch (IllegalAccessException e) {
             Selenide.screenshot("No_element");
-            throw new Error("ERROR: element with name " + elementName + " at page " + this.getClass().getName() + " is not public");
+            throw new RuntimeException("ERROR: element with name " + elementName + " at page " + this.getClass().getName() + " is not public");
         }catch (NoSuchElementException e1){
             Selenide.screenshot("No_element");
             throw new NoSuchElementException("ERROR: there is no such element with name " + elementName + " at page " + this.getClass().getName());
@@ -48,7 +48,7 @@ public class AbstractContainer extends ElementsContainer {
                             && field.getAnnotation(NameOfElement.class).value().equals(elementName)).findFirst().get().get(this);
         } catch (IllegalAccessException e) {
             Selenide.screenshot("No_container");
-            throw new Error("ERROR: container with name " + elementName + " at page " + this.getClass().getName() + " is not public");
+            throw new RuntimeException("ERROR: container with name " + elementName + " at page " + this.getClass().getName() + " is not public");
         }catch (NoSuchElementException e1){
             Selenide.screenshot("No_container");
             throw new NoSuchElementException("ERROR: there is no such container with name " + elementName + " at page " + this.getClass().getName());
@@ -72,7 +72,7 @@ public class AbstractContainer extends ElementsContainer {
         try {
             listElements= (List<SelenideElement>) returnField.get(this);
         } catch (IllegalAccessException e) {
-            throw new Error(e);
+            throw new RuntimeException(e);
         }
 
         Class<?> listType = returnField.getAnnotation(NameOfBlock.class).value();
@@ -92,7 +92,7 @@ public class AbstractContainer extends ElementsContainer {
             result.setSelf(self);
             return result;
         } catch (NoSuchMethodException|IllegalAccessException|InstantiationException|InvocationTargetException e) {
-            throw new Error(e);
+            throw new RuntimeException(e);
         }
     }
 
@@ -105,7 +105,7 @@ public class AbstractContainer extends ElementsContainer {
                             && field.getAnnotation(NameOfElement.class).value().equals(elementName)).findFirst().get().get(this);
         } catch (IllegalAccessException e) {
             Selenide.screenshot("No_container");
-            throw new Error("ERROR: container with name " + elementName + " at page " + this.getClass().getName() + " is not public");
+            throw new RuntimeException("ERROR: container with name " + elementName + " at page " + this.getClass().getName() + " is not public");
         }catch (NoSuchElementException e1){
             Selenide.screenshot("No_container");
             throw new NoSuchElementException("ERROR: there is no such container with name " + elementName + " at page " + this.getClass().getName());

@@ -19,6 +19,8 @@ dependencies {
     compile group: 'info.cukes', name: 'cucumber-java8', version: '1.2.5'
     // https://mvnrepository.com/artifact/info.cukes/cucumber-junit
     compile group: 'info.cukes', name: 'cucumber-junit', version: '1.2.5'
+
+    compile 'com.github.mkolisnyk:cucumber-reports:0.0.2'
 }
 
 defaultTasks 'clean', 'test'
